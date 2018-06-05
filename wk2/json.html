@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lastVisit</title>
+</head>
+<body>
+  <p>
+    You have accessed this page <span id="report"> </span> times.
+  </p>
+  <p>
+    Your last visit was on <span id="lastVisitDate"> </span>.
+  </p>
+
+  <script>
+
+    var timesVisited = 0;
+    var lastVisitDate = 'never';
+
+    if (localStorage.lastVisit) {
+      var lastVisit = JSON.parse(localStorage.lastVisit);
+      timesVisited = lastVisit.numVisits;
+      lastVisitDate = lastVisit.date;
+    }
+
+    document.getElementById('lastVisitDate').innerHTML = lastVisitDate;
+
+    timesVisited++;
+    document.getElementById('report').innerHTML = timesVisited;
+
+    var myLastVisit = {}
+    myLastVisit.date = new Date();
+    myLastVisit.numVisits = timesVisited;
+    localStorage.lastVisit = JSON.stringify(myLastVisit);
+
+  </script>
+</body>
+</html>

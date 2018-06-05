@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Password Validator</title>
+
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      background: #eee;
+      font: 14px/150% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    form {
+      box-shadow: 0 6px 40px;
+      border-radius: 5px;
+      padding: 66px 0 22px 0;
+      display: block;
+      background-color: #fff;
+      width: 40%;
+      min-height: 200px;
+      text-align: center;
+      margin: 44px auto;
+    }
+    button,
+    input {
+      font-size: 1em;
+      display: inline-block;
+      height: 30px;
+      width: 80%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 22px;
+      vertical-align: bottom;
+    }
+    button {
+      background: #eef;
+    }
+    .errorText {
+      color: #f55;
+    }
+    #successMessage {
+      color: #5f5;
+    }
+    .goodbox {
+      border: 1px solid #5f5;
+    }
+    .badbox {
+      border: 1px solid #f55;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <form class="form">
+
+    <input name="passwordField" placeholder="Password"></input><br>
+
+    <span id="errorMessages" class="errorText" hidden>Please fix the following errors:
+    <ul>
+      <li id="needsNumber" class="errorText" hidden>Password must contain at least 1 number</li>
+      <li id="atLeast7Chars" class="errorText" hidden>Password must contain at least 7 characters</li>
+    </ul>
+    </span>
+
+    <span id="successMessage" hidden>Password is validated!</span>
+
+    <button name="submit">Submit</button>
+
+  </form>
+
+  <script>
+
+    $('button[name=submit]').click(function() {
+      var passwordField = $('input[name=passwordField]');
+      var password = passwordField.val();
+      var isOkay = true;
+      if (password.length < 7) {
+        isOkay = false;
+        $('#atLeast7Chars').show();
+      } else {
+        $('#atLeast7Chars').hide();
+      }
+      if (/\d/.test(password) == false) {
+        isOkay = false;
+        $('#needsNumber').show();
+      } else {
+        $('#needsNumber').hide();
+      }
+      if (!isOkay) {
+        $('#successMessage').hide();
+        $('#errorMessages').show();
+        $(passwordField).removeClass('goodbox').addClass('badbox');
+      }
+      if (isOkay) {
+        $('#successMessage').show();
+        $('#errorMessages').hide();
+        $(passwordField).removeClass('badbox').addClass('goodbox');
+      }
+      return false;
+    });
+
+  </script>
+
+</body>
+</html>

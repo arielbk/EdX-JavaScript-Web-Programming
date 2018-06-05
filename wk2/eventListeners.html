@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event Listeners</title>
+</head>
+<body>
+
+  <p id="mouseOver">Mouse over this text</p>
+  <p class="mouseListen">This should change</p>
+  <p>This shouldn't</p>
+  <p class="mouseListen">But then this should</p>
+  <p>
+    <input type="input" id="inputText"></input>
+    This is what you entered: <span id="outputText">nothing</span>
+  </p>
+  <script>
+
+  function changeStyle() {
+    var divs = document.getElementsByClassName('mouseListen')
+    for (var i = 0; i < divs.length; i++) {
+      divs[i].style.backgroundColor = 'blue'
+    }
+  }
+
+  function restore() {
+    var divs = document.getElementsByClassName('mouseListen')
+    for (var i = 0; i < divs.length; i++) {
+      divs[i].style.backgroundColor = 'white'
+    }
+  }
+
+  var mouseOverText = document.getElementById('mouseOver');
+  mouseOverText.addEventListener('mouseover', changeStyle);
+  mouseOverText.addEventListener('mouseout', restore);
+
+  function changeText(e) {
+    if (e.keyCode == 13) {
+      var inputText = document.getElementById('inputText');
+      var outputText = document.getElementById('outputText');
+      outputText.innerHTML = inputText.value;
+    }
+  }
+
+  document.addEventListener('keyup', changeText);
+
+  </script>
+
+</body>
+</html>

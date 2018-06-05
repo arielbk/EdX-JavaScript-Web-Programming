@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JQuery practice</title>
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>List App</h1>
+  <ul class="highlight">
+    This is actually a list that you can hover over and the items will become highlighted...
+    <li>an item</li>
+    <li>another one</li>
+    <li>elephant</li>
+    <li>cheetah</li>
+  </ul>
+  <p>Insert something into the list: <input type="text"></input></p>
+
+  <ul class="appList"></ul>
+
+  <script>
+
+    function listAdd(e) {
+      if (e.keyCode == 13) {
+        $('ul.appList').append('<li>' + $('input').val() + '</li>');
+      }
+    }
+
+    $('input').keyup(listAdd);
+
+    $('ul.highlight').find('li').on({
+      mouseenter: function() {
+        $(this).css('color', '#f00');
+        $(this).css('font-weight', 'bold');
+      },
+      mouseleave: function() {
+        $(this).css('color', '#000');
+        $(this).css('font-weight', 'normal');
+      },
+      click: function() {
+        $(this).css('text-decoration', 'underline');
+      }
+    });
+
+  </script>
+</body>
+</html>
